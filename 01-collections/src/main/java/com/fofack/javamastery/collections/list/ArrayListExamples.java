@@ -162,4 +162,113 @@ public class ArrayListExamples {
             T element) {
         return list.set(index, element);
     }
+
+    /*
+     * ============================================================
+     * 03 - READ AND SEARCH
+     * ============================================================
+     */
+
+    /**
+     * Returns the element at the specified index.
+     *
+     * Valid index:
+     * 0 <= index < size()
+     *
+     * @param list  the ArrayList to read from
+     * @param index position of the element
+     * @return the element at the specified position
+     * @throws IndexOutOfBoundsException if the index is invalid
+     */
+    public <T> T getAtIndex(
+            ArrayList<T> list,
+            int index) {
+        return list.get(index);
+    }
+
+    /**
+     * Returns the first element of the list.
+     *
+     * Available through the Java 21 sequenced collection API.
+     *
+     * @param list the ArrayList to read from
+     * @return the first element
+     * @throws java.util.NoSuchElementException if the list is empty
+     */
+    public <T> T getFirst(
+            ArrayList<T> list) {
+        return list.getFirst();
+    }
+
+    /**
+     * Returns the last element of the list.
+     *
+     * Available through the Java 21 sequenced collection API.
+     *
+     * @param list the ArrayList to read from
+     * @return the last element
+     * @throws java.util.NoSuchElementException if the list is empty
+     */
+    public <T> T getLast(
+            ArrayList<T> list) {
+        return list.getLast();
+    }
+
+    /**
+     * Checks whether the list contains the specified element.
+     *
+     * The comparison is based on logical equality.
+     *
+     * @param list    the ArrayList to search
+     * @param element element to search for
+     * @return true if at least one matching element exists
+     */
+    public <T> boolean contains(
+            ArrayList<T> list,
+            Object element) {
+        return list.contains(element);
+    }
+
+    /**
+     * Checks whether the list contains all elements
+     * from the provided collection.
+     *
+     * @param list     the ArrayList to search
+     * @param elements elements that must all be present
+     * @return true if every requested element is present
+     * @throws NullPointerException if elements is null
+     */
+    public <T> boolean containsAll(
+            ArrayList<T> list,
+            Collection<?> elements) {
+        return list.containsAll(elements);
+    }
+
+    /**
+     * Returns the index of the first occurrence
+     * of the specified element.
+     *
+     * @param list    the ArrayList to search
+     * @param element element to search for
+     * @return the first matching index, or -1 if not found
+     */
+    public <T> int indexOf(
+            ArrayList<T> list,
+            Object element) {
+        return list.indexOf(element);
+    }
+
+    /**
+     * Returns the index of the last occurrence
+     * of the specified element.
+     *
+     * @param list    the ArrayList to search
+     * @param element element to search for
+     * @return the last matching index, or -1 if not found
+     */
+    public <T> int lastIndexOf(
+            ArrayList<T> list,
+            Object element) {
+        return list.lastIndexOf(element);
+    }
 }

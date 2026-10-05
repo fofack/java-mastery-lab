@@ -515,4 +515,417 @@ class ArrayListExamplesTest {
                         -1,
                         "Spring Boot"));
     }
+
+    /*
+     * ============================================================
+     * 03 - READ AND SEARCH
+     * ============================================================
+     */
+
+    @Test
+    void shouldGetElementAtSpecifiedIndex() {
+
+        ArrayList<String> technologies = new ArrayList<>(
+                List.of(
+                        "Java",
+                        "Spring Boot",
+                        "React"));
+
+        String result = examples.getAtIndex(
+                technologies,
+                1);
+
+        assertEquals(
+                "Spring Boot",
+                result);
+    }
+
+    @Test
+    void shouldGetFirstElement() {
+
+        ArrayList<String> technologies = new ArrayList<>(
+                List.of(
+                        "Java",
+                        "Spring Boot",
+                        "React"));
+
+        String result = examples.getFirst(technologies);
+
+        assertEquals(
+                "Java",
+                result);
+    }
+
+    @Test
+    void shouldGetLastElement() {
+
+        ArrayList<String> technologies = new ArrayList<>(
+                List.of(
+                        "Java",
+                        "Spring Boot",
+                        "React"));
+
+        String result = examples.getLast(technologies);
+
+        assertEquals(
+                "React",
+                result);
+    }
+
+    @Test
+    void shouldThrowExceptionWhenGetIndexIsNegative() {
+
+        ArrayList<String> technologies = new ArrayList<>(
+                List.of("Java"));
+
+        assertThrows(
+                IndexOutOfBoundsException.class,
+                () -> examples.getAtIndex(
+                        technologies,
+                        -1));
+    }
+
+    @Test
+    void shouldThrowExceptionWhenGetIndexEqualsSize() {
+
+        ArrayList<String> technologies = new ArrayList<>(
+                List.of(
+                        "Java",
+                        "Spring Boot"));
+
+        assertThrows(
+                IndexOutOfBoundsException.class,
+                () -> examples.getAtIndex(
+                        technologies,
+                        technologies.size()));
+    }
+
+    @Test
+    void shouldThrowExceptionWhenGetIndexIsGreaterThanSize() {
+
+        ArrayList<String> technologies = new ArrayList<>(
+                List.of("Java"));
+
+        assertThrows(
+                IndexOutOfBoundsException.class,
+                () -> examples.getAtIndex(
+                        technologies,
+                        10));
+    }
+
+    @Test
+    void shouldThrowExceptionWhenGettingFirstElementFromEmptyList() {
+
+        ArrayList<String> technologies = new ArrayList<>();
+
+        assertThrows(
+                java.util.NoSuchElementException.class,
+                () -> examples.getFirst(
+                        technologies));
+    }
+
+    @Test
+    void shouldThrowExceptionWhenGettingLastElementFromEmptyList() {
+
+        ArrayList<String> technologies = new ArrayList<>();
+
+        assertThrows(
+                java.util.NoSuchElementException.class,
+                () -> examples.getLast(
+                        technologies));
+    }
+
+    @Test
+    void shouldReturnNullWhenFirstElementIsNull() {
+
+        ArrayList<String> technologies = new ArrayList<>();
+
+        technologies.add(null);
+        technologies.add("Java");
+
+        String result = examples.getFirst(technologies);
+
+        assertNull(result);
+    }
+
+    @Test
+    void shouldReturnNullWhenLastElementIsNull() {
+
+        ArrayList<String> technologies = new ArrayList<>();
+
+        technologies.add("Java");
+        technologies.add(null);
+
+        String result = examples.getLast(technologies);
+
+        assertNull(result);
+    }
+
+    @Test
+    void shouldReturnTrueWhenElementExists() {
+
+        ArrayList<String> technologies = new ArrayList<>(
+                List.of(
+                        "Java",
+                        "Spring Boot",
+                        "React"));
+
+        boolean result = examples.contains(
+                technologies,
+                "Spring Boot");
+
+        assertTrue(result);
+    }
+
+    @Test
+    void shouldReturnFalseWhenElementDoesNotExist() {
+
+        ArrayList<String> technologies = new ArrayList<>(
+                List.of(
+                        "Java",
+                        "Spring Boot",
+                        "React"));
+
+        boolean result = examples.contains(
+                technologies,
+                "Flutter");
+
+        assertFalse(result);
+    }
+
+    @Test
+    void shouldFindNullElement() {
+
+        ArrayList<String> technologies = new ArrayList<>();
+
+        technologies.add("Java");
+        technologies.add(null);
+        technologies.add("React");
+
+        boolean result = examples.contains(
+                technologies,
+                null);
+
+        assertTrue(result);
+    }
+
+    @Test
+    void shouldReturnFalseWhenNullElementDoesNotExist() {
+
+        ArrayList<String> technologies = new ArrayList<>(
+                List.of(
+                        "Java",
+                        "Spring Boot"));
+
+        boolean result = examples.contains(
+                technologies,
+                null);
+
+        assertFalse(result);
+    }
+
+    @Test
+    void shouldReturnTrueWhenAllElementsExist() {
+
+        ArrayList<String> technologies = new ArrayList<>(
+                List.of(
+                        "Java",
+                        "Spring Boot",
+                        "React",
+                        "Angular"));
+
+        boolean result = examples.containsAll(
+                technologies,
+                List.of(
+                        "Java",
+                        "React"));
+
+        assertTrue(result);
+    }
+
+    @Test
+    void shouldReturnFalseWhenAtLeastOneElementDoesNotExist() {
+
+        ArrayList<String> technologies = new ArrayList<>(
+                List.of(
+                        "Java",
+                        "Spring Boot",
+                        "React"));
+
+        boolean result = examples.containsAll(
+                technologies,
+                List.of(
+                        "Java",
+                        "Flutter"));
+
+        assertFalse(result);
+    }
+
+    @Test
+    void shouldReturnTrueWhenCheckingEmptyCollection() {
+
+        ArrayList<String> technologies = new ArrayList<>(
+                List.of(
+                        "Java",
+                        "Spring Boot"));
+
+        boolean result = examples.containsAll(
+                technologies,
+                List.of());
+
+        assertTrue(result);
+    }
+
+    @Test
+    void shouldThrowExceptionWhenContainsAllArgumentIsNull() {
+
+        ArrayList<String> technologies = new ArrayList<>(
+                List.of("Java"));
+
+        assertThrows(
+                NullPointerException.class,
+                () -> examples.containsAll(
+                        technologies,
+                        null));
+    }
+
+    @Test
+    void shouldReturnFirstOccurrenceIndex() {
+
+        ArrayList<String> technologies = new ArrayList<>(
+                List.of(
+                        "Java",
+                        "Spring Boot",
+                        "React",
+                        "Java"));
+
+        int result = examples.indexOf(
+                technologies,
+                "Java");
+
+        assertEquals(
+                0,
+                result);
+    }
+
+    @Test
+    void shouldReturnMinusOneWhenIndexOfElementDoesNotExist() {
+
+        ArrayList<String> technologies = new ArrayList<>(
+                List.of(
+                        "Java",
+                        "Spring Boot"));
+
+        int result = examples.indexOf(
+                technologies,
+                "Flutter");
+
+        assertEquals(
+                -1,
+                result);
+    }
+
+    @Test
+    void shouldReturnFirstNullIndex() {
+
+        ArrayList<String> technologies = new ArrayList<>();
+
+        technologies.add("Java");
+        technologies.add(null);
+        technologies.add("React");
+        technologies.add(null);
+
+        int result = examples.indexOf(
+                technologies,
+                null);
+
+        assertEquals(
+                1,
+                result);
+    }
+
+    @Test
+    void shouldReturnLastOccurrenceIndex() {
+
+        ArrayList<String> technologies = new ArrayList<>(
+                List.of(
+                        "Java",
+                        "Spring Boot",
+                        "React",
+                        "Java"));
+
+        int result = examples.lastIndexOf(
+                technologies,
+                "Java");
+
+        assertEquals(
+                3,
+                result);
+    }
+
+    @Test
+    void shouldReturnMinusOneWhenLastIndexOfElementDoesNotExist() {
+
+        ArrayList<String> technologies = new ArrayList<>(
+                List.of(
+                        "Java",
+                        "Spring Boot"));
+
+        int result = examples.lastIndexOf(
+                technologies,
+                "Flutter");
+
+        assertEquals(
+                -1,
+                result);
+    }
+
+    @Test
+    void shouldReturnLastNullIndex() {
+
+        ArrayList<String> technologies = new ArrayList<>();
+
+        technologies.add(null);
+        technologies.add("Java");
+        technologies.add(null);
+        technologies.add("React");
+
+        int result = examples.lastIndexOf(
+                technologies,
+                null);
+
+        assertEquals(
+                2,
+                result);
+    }
+
+    private record Technology(
+            String name) {
+    }
+
+    @Test
+    void shouldFindDifferentObjectWhenLogicallyEqual() {
+
+        Technology storedTechnology = new Technology("Java");
+
+        Technology searchedTechnology = new Technology("Java");
+
+        ArrayList<Technology> technologies = new ArrayList<>();
+
+        technologies.add(storedTechnology);
+
+        boolean result = examples.contains(
+                technologies,
+                searchedTechnology);
+
+        assertTrue(result);
+
+        assertNotSame(
+                storedTechnology,
+                searchedTechnology);
+
+        assertEquals(
+                storedTechnology,
+                searchedTechnology);
+    }
 }
