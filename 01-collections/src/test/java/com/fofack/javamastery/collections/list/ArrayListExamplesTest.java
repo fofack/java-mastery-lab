@@ -118,4 +118,401 @@ class ArrayListExamplesTest {
                 List.of("Java", "Spring Boot", "React"),
                 list);
     }
+
+    /*
+     * ============================================================
+     * 02 - ADD AND UPDATE
+     * ============================================================
+     */
+
+    @Test
+    void shouldAddElementAtEnd() {
+
+        ArrayList<String> technologies = new ArrayList<>();
+
+        boolean changed = examples.add(technologies, "Java");
+
+        assertTrue(changed);
+        assertEquals(1, technologies.size());
+        assertEquals("Java", technologies.get(0));
+    }
+
+    @Test
+    void shouldPreserveInsertionOrderWhenAddingElements() {
+
+        ArrayList<String> technologies = new ArrayList<>();
+
+        examples.add(technologies, "Java");
+        examples.add(technologies, "Spring Boot");
+        examples.add(technologies, "React");
+
+        assertEquals(
+                List.of("Java", "Spring Boot", "React"),
+                technologies);
+    }
+
+    @Test
+    void shouldAllowDuplicateElements() {
+
+        ArrayList<String> technologies = new ArrayList<>();
+
+        examples.add(technologies, "Java");
+        examples.add(technologies, "Java");
+
+        assertEquals(2, technologies.size());
+
+        assertEquals(
+                List.of("Java", "Java"),
+                technologies);
+    }
+
+    @Test
+    void shouldAllowNullElements() {
+
+        ArrayList<String> technologies = new ArrayList<>();
+
+        examples.add(technologies, null);
+
+        assertEquals(1, technologies.size());
+        assertNull(technologies.get(0));
+    }
+
+    @Test
+    void shouldInsertElementAtSpecifiedIndex() {
+
+        ArrayList<String> technologies = new ArrayList<>(
+                List.of("Java", "React"));
+
+        examples.addAtIndex(
+                technologies,
+                1,
+                "Spring Boot");
+
+        assertEquals(
+                List.of(
+                        "Java",
+                        "Spring Boot",
+                        "React"),
+                technologies);
+    }
+
+    @Test
+    void shouldAllowInsertionAtIndexEqualToSize() {
+
+        ArrayList<String> technologies = new ArrayList<>(
+                List.of("Java", "Spring Boot"));
+
+        examples.addAtIndex(
+                technologies,
+                technologies.size(),
+                "React");
+
+        assertEquals(
+                List.of(
+                        "Java",
+                        "Spring Boot",
+                        "React"),
+                technologies);
+    }
+
+    @Test
+    void shouldThrowExceptionWhenAddIndexIsNegative() {
+
+        ArrayList<String> technologies = new ArrayList<>(
+                List.of("Java"));
+
+        assertThrows(
+                IndexOutOfBoundsException.class,
+                () -> examples.addAtIndex(
+                        technologies,
+                        -1,
+                        "Spring Boot"));
+    }
+
+    @Test
+    void shouldThrowExceptionWhenAddIndexIsGreaterThanSize() {
+
+        ArrayList<String> technologies = new ArrayList<>(
+                List.of("Java"));
+
+        assertThrows(
+                IndexOutOfBoundsException.class,
+                () -> examples.addAtIndex(
+                        technologies,
+                        2,
+                        "Spring Boot"));
+    }
+
+    @Test
+    void shouldAddElementAtBeginningUsingAddFirst() {
+
+        ArrayList<String> technologies = new ArrayList<>(
+                List.of(
+                        "Spring Boot",
+                        "React"));
+
+        examples.addFirst(
+                technologies,
+                "Java");
+
+        assertEquals(
+                List.of(
+                        "Java",
+                        "Spring Boot",
+                        "React"),
+                technologies);
+    }
+
+    @Test
+    void shouldAddElementAtEndUsingAddLast() {
+
+        ArrayList<String> technologies = new ArrayList<>(
+                List.of(
+                        "Java",
+                        "Spring Boot"));
+
+        examples.addLast(
+                technologies,
+                "React");
+
+        assertEquals(
+                List.of(
+                        "Java",
+                        "Spring Boot",
+                        "React"),
+                technologies);
+    }
+
+    @Test
+    void shouldAddAllElementsAtEnd() {
+
+        ArrayList<String> technologies = new ArrayList<>(
+                List.of("Java"));
+
+        List<String> frameworks = List.of(
+                "Spring Boot",
+                "React",
+                "Angular");
+
+        boolean changed = examples.addAll(
+                technologies,
+                frameworks);
+
+        assertTrue(changed);
+
+        assertEquals(
+                List.of(
+                        "Java",
+                        "Spring Boot",
+                        "React",
+                        "Angular"),
+                technologies);
+    }
+
+    @Test
+    void shouldReturnFalseWhenAddingEmptyCollection() {
+
+        ArrayList<String> technologies = new ArrayList<>(
+                List.of("Java"));
+
+        boolean changed = examples.addAll(
+                technologies,
+                List.of());
+
+        assertFalse(changed);
+
+        assertEquals(
+                List.of("Java"),
+                technologies);
+    }
+
+    @Test
+    void shouldThrowExceptionWhenAddAllSourceIsNull() {
+
+        ArrayList<String> technologies = new ArrayList<>();
+
+        assertThrows(
+                NullPointerException.class,
+                () -> examples.addAll(
+                        technologies,
+                        null));
+    }
+
+    @Test
+    void shouldInsertCollectionAtSpecifiedIndex() {
+
+        ArrayList<String> technologies = new ArrayList<>(
+                List.of(
+                        "Java",
+                        "Angular"));
+
+        List<String> values = List.of(
+                "Spring Boot",
+                "React");
+
+        boolean changed = examples.addAllAtIndex(
+                technologies,
+                1,
+                values);
+
+        assertTrue(changed);
+
+        assertEquals(
+                List.of(
+                        "Java",
+                        "Spring Boot",
+                        "React",
+                        "Angular"),
+                technologies);
+    }
+
+    @Test
+    void shouldAllowAddAllAtIndexEqualToSize() {
+
+        ArrayList<String> technologies = new ArrayList<>(
+                List.of(
+                        "Java",
+                        "Spring Boot"));
+
+        examples.addAllAtIndex(
+                technologies,
+                technologies.size(),
+                List.of(
+                        "React",
+                        "Angular"));
+
+        assertEquals(
+                List.of(
+                        "Java",
+                        "Spring Boot",
+                        "React",
+                        "Angular"),
+                technologies);
+    }
+
+    @Test
+    void shouldThrowExceptionWhenAddAllIndexIsGreaterThanSize() {
+
+        ArrayList<String> technologies = new ArrayList<>(
+                List.of("Java"));
+
+        assertThrows(
+                IndexOutOfBoundsException.class,
+                () -> examples.addAllAtIndex(
+                        technologies,
+                        2,
+                        List.of("Spring Boot")));
+    }
+
+    @Test
+    void shouldThrowExceptionWhenAddAllIndexIsNegative() {
+
+        ArrayList<String> technologies = new ArrayList<>(
+                List.of("Java"));
+
+        assertThrows(
+                IndexOutOfBoundsException.class,
+                () -> examples.addAllAtIndex(
+                        technologies,
+                        -1,
+                        List.of("Spring Boot")));
+    }
+
+    @Test
+    void shouldReplaceElementAndReturnPreviousValue() {
+
+        ArrayList<String> technologies = new ArrayList<>(
+                List.of(
+                        "Java",
+                        "Spring",
+                        "React"));
+
+        String previous = examples.set(
+                technologies,
+                1,
+                "Spring Boot");
+
+        assertEquals(
+                "Spring",
+                previous);
+
+        assertEquals(
+                List.of(
+                        "Java",
+                        "Spring Boot",
+                        "React"),
+                technologies);
+    }
+
+    @Test
+    void setShouldNotChangeListSize() {
+
+        ArrayList<String> technologies = new ArrayList<>(
+                List.of(
+                        "Java",
+                        "Spring",
+                        "React"));
+
+        int sizeBefore = technologies.size();
+
+        examples.set(
+                technologies,
+                1,
+                "Spring Boot");
+
+        assertEquals(
+                sizeBefore,
+                technologies.size());
+    }
+
+    @Test
+    void shouldAllowReplacingElementWithNull() {
+
+        ArrayList<String> technologies = new ArrayList<>(
+                List.of(
+                        "Java",
+                        "Spring Boot"));
+
+        String previous = examples.set(
+                technologies,
+                1,
+                null);
+
+        assertEquals(
+                "Spring Boot",
+                previous);
+
+        assertNull(
+                technologies.get(1));
+    }
+
+    @Test
+    void shouldThrowExceptionWhenSetIndexEqualsSize() {
+
+        ArrayList<String> technologies = new ArrayList<>(
+                List.of(
+                        "Java",
+                        "Spring Boot"));
+
+        assertThrows(
+                IndexOutOfBoundsException.class,
+                () -> examples.set(
+                        technologies,
+                        technologies.size(),
+                        "React"));
+    }
+
+    @Test
+    void shouldThrowExceptionWhenSetIndexIsNegative() {
+
+        ArrayList<String> technologies = new ArrayList<>(
+                List.of("Java"));
+
+        assertThrows(
+                IndexOutOfBoundsException.class,
+                () -> examples.set(
+                        technologies,
+                        -1,
+                        "Spring Boot"));
+    }
 }
